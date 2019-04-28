@@ -21,7 +21,7 @@ class Analisador_Lexico:
 
     def Reconhecedor(self, programa, i=0):
         num_linha = 1           # Linha atual de leitura
-        token = ""               # Palavra (Token)
+        token = ""              # Palavra (Token)
         tam = len(programa)     # Tamanho do programa
         i = 0                   # Contador de Caracter
         lex_cod = 0             # Código do Token
@@ -146,7 +146,7 @@ class Analisador_Lexico:
                     i+=1                     # Avança para o proximo caracter
                     lex_cod = 29             # Código do Token comparador maior ou igual (>=)     
 
-                if programa[i] == "<":       # Verifica se o proximo é outro >     
+                if programa[i] == ">":       # Verifica se o proximo é outro >     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
                     lex_cod = 28             # Código do Token >> (cin)             
@@ -250,7 +250,7 @@ class Analisador_Lexico:
             resultado.append(Token(token, lex_cod, num_linha))  # Adiciona resultado na lista (vetor resultado)
             token = ""                                          # Reseta o token para continuar a leitura
 
-        return resultado   # Retorna o verto contendo (Token, Código, Linha)
+        return resultado   # Retorna o vetor contendo (Token, Código, Linha)
 
 
         # FUNÇÃO MAIN
