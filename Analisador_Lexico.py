@@ -8,7 +8,7 @@ class Token:
         self.linha = linha          # Linha
 
     def __str__(self):
-        return self.palavra + "\t" + self.lex_cod + "\t" + str(self.linha)
+        return str(self.palavra) + "\t" + str(self.lex_cod) + "\t" + str(self.linha)
         # Saida:     Token            Código                  Nº Linha
 
 
@@ -33,7 +33,7 @@ class Analisador_Lexico:
 
                 token += programa[i]                                              
                 i+=1
-                lex_cod = 5 #INTEIRO
+                lex_cod = "5" #INTEIRO
 
                 while i < tam-1:    # Continua verificando o próximo caracter
 
@@ -43,7 +43,7 @@ class Analisador_Lexico:
                     elif programa[i] == ".":     # Se houver um ponto, significa que é um float 
                         token += programa[i]     # Adiciona o ponto ao token
                         i+=1
-                        lex_cod = 19 #FLOAT
+                        lex_cod = "19" #FLOAT
 
                         while i < tam - 1:               # Verificar se há mais números após o ponto
                             if programa[i].isdigit():
@@ -68,44 +68,44 @@ class Analisador_Lexico:
                         break                # Se não for nenhum desses, para o while          
 
                 if token in self.palavras_reservadas:           # Verfica se o token é uma das palavras reservadas da linguagem
-                    pos = palavras_reservadas.index(token)      # Pega a posição do vetor dentro da lista de palavras reservadas
-                    lex_cod = codigo_reservadas[pos]            # Retorna o código do token referente a posição da lista
+                    pos = self.palavras_reservadas.index(token)      # Pega a posição do vetor dentro da lista de palavras reservadas
+                    lex_cod = self.codigo_reservadas[pos]            # Retorna o código do token referente a posição da lista
 
 
             elif programa[i] == "+":
             
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 37                 # Código do Token Somador (+)
+                lex_cod = "37"                 # Código do Token Somador (+)
 
                 if programa[i] == "+":       # Verifica se o proximo também é um +     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 36             # Código do Token Incrementador (++)
+                    lex_cod = "36"             # Código do Token Incrementador (++)
 
 
             elif programa[i] == "-":
             
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 37                 # Código do Token Subtrator (-)
+                lex_cod = "37"                 # Código do Token Subtrator (-)
 
                 if programa[i] == "-":       # Verifica se o proximo também é um +     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 36             # Código do Token Descrementador (++)
+                    lex_cod = "36"             # Código do Token Descrementador (++)
                                                       
 
             elif programa[i] is "*":         # Se for um multiplicador
                 token = programa[i]
-                lex_cod = 44                 # Código do token de multiplicação
+                lex_cod = "44"                 # Código do token de multiplicação
                 i+=1
 
 
             elif programa[i] is "/":         # Se for um divisor (/)
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 42                 # Código do Token divisor (/)
+                lex_cod = "42"                 # Código do Token divisor (/)
 
                 if programa[i] is "/":       # Verifica se existe a segunda '/'
                     i+=1
@@ -122,47 +122,47 @@ class Analisador_Lexico:
             
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 35                 # Código do Token comparador Menor (<)
+                lex_cod = "35"                 # Código do Token comparador Menor (<)
 
                 if programa[i] == "=":       # Verifica se o proximo é um =     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 33             # Código do Token comparador menor ou igual (<=)     
+                    lex_cod = "33"             # Código do Token comparador menor ou igual (<=)     
 
                 if programa[i] == "<":       # Verifica se o proximo é outro <     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 33             # Código do Token << (count)      
+                    lex_cod = "33"             # Código do Token << (count)      
 
 
             elif programa[i] == ">":
             
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 30                 # Código do Token comparador maior (>)
+                lex_cod = "30"                 # Código do Token comparador maior (>)
 
                 if programa[i] == "=":       # Verifica se o proximo é um =     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 29             # Código do Token comparador maior ou igual (>=)     
+                    lex_cod = "29"             # Código do Token comparador maior ou igual (>=)     
 
                 if programa[i] == ">":       # Verifica se o proximo é outro >     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 28             # Código do Token >> (cin)             
+                    lex_cod = "28"             # Código do Token >> (cin)             
 
 
 
-             elif programa[i] == "=":
+            elif programa[i] == "=":
             
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-                lex_cod = 32                 # Código do Token igual (=)
+                lex_cod = "32"                 # Código do Token igual (=)
 
                 if programa[i] == "=":       # Verifica se o proximo também é um =     
                     token += programa[i]     # Se for, adiciona ao token
                     i+=1                     # Avança para o proximo caracter
-                    lex_cod = 31             # Código do Token comparador igual (==)
+                    lex_cod = "31"             # Código do Token comparador igual (==)
 
             elif programa[i] == "!":
             
@@ -170,18 +170,11 @@ class Analisador_Lexico:
                 i+=1                         # Avança para o proximo caracter
                 if programa[i] == "=":    
                     i+=1
-                    ex_cod = 31              # Código do Token comparador diferente (!=)
+                    lex_cod = "31"              # Código do Token comparador diferente (!=)
                 else:
-                    sys.exit("ERRO Léxico: Token '!' inesperado na linha: "+str(num_linha))    # Se não tiver != em sequência gera um erro
+                    i+=1
+                    print("ERRO Léxico: Token '!' inesperado na linha: "+str(num_linha))    # Se não tiver != em sequência gera um erro
 
-
-            elif programa[i] is "}" :
-                sys.exit("ERRO Léxico: Token '}' inesperado na linha: "+str(num_linha))        # Se '}' aparecer antes mesmo de ser aberto
-                break
-
-            elif programa[i] is ")" :
-                sys.exit("ERRO Léxico: Token ')' inesperado na linha: "+str(num_linha))        # Se ')' aparecer antes mesmo de ser aberto
-                break
 
             elif programa[i] == "\n":        # Contagem de linhas
                 num_linha += 1
@@ -193,15 +186,20 @@ class Analisador_Lexico:
                 continue
 
             elif programa[i] is "{":          # Verifica se alguma chave foi aberta
-                backup = i                    # Backup da posição atual para voltar depois
+                backup = i                    # Backup da posição atual para voltar depois                    
                 while i < tam -1:
                     i+=1
                     if programa[i] is "}":    # Verifica se a chave aberta foi fechada
+                        lex_cod = "39"          # Código do '{'
+                        resultado.append(Token( programa[backup], lex_cod, num_linha))  # Se for aberto e fechado corretamente, adiciona o { no resultado
+
+                        token = programa[i]   # Token '}'
+                        lex_cod = "38"          # Código do '}'
                         i=backup+1
                         break
                 else:
                         i=backup+1
-                        sys.exit("ERRO Léxico: Chave aberta mas não fechada na linha: "+str(num_linha))
+                        print("ERRO Léxico: Chave aberta mas não fechada na linha: "+str(num_linha))
                         break
                 continue
 
@@ -209,12 +207,18 @@ class Analisador_Lexico:
                 backup = i                    # Backup da posição atual para voltar depois
                 while i < tam -1:
                     i+=1
-                    if programa[i] is ")":    # Verifica se o parentese foi fechado
+                    if programa[i] is ")":    # Verifica se o parentese foi efchado
+                        lex_cod = "46"          # Código do '('
+                        resultado.append(Token( programa[backup], lex_cod, num_linha))  # Se for aberto e fechado corretamente, adiciona o ( no resultado
+
+                        token = programa[i]   # Token ')'
+                        lex_cod = "45"          # Código do ')'
+                        resultado.append(Token( token, lex_cod, num_linha))  # Se for aberto e fechado corretamente, adiciona o ) no resultado
                         i=backup+1
                         break
                 else:
                         i=backup+1
-                        sys.exit("ERRO Léxico: Parentese aberto mas não fechado na linha: "+str(num_linha))
+                        print("ERRO Léxico: Chave aberta mas não fechada na linha: "+str(num_linha))
                         break
                 continue    
 
@@ -235,7 +239,8 @@ class Analisador_Lexico:
                         elif programa[i] is "\n":
                             num_linha += 1       # Se quebrar linha, conta como linha nova e continua buscando fim do comentario
                     else:
-                            sys.exit("ERRO Léxico: Comentário aberto e não fechado, inicio na linha: "+str(ln))  # Erro se não for fechado
+                            print("ERRO Léxico: Comentário aberto e não fechado, inicio na linha: "+str(ln))  # Erro se não for fechado
+                            i+=1
                             break
                     continue
 
@@ -243,7 +248,7 @@ class Analisador_Lexico:
 
             else:       # Caso seja algum caracter que não esteja definido na linguagem
 
-                sys.exit("ERRO Léxico: Token '" + programa[i] + "' não é aceito. Erro na linha: " + str(num_linha))
+                print("ERRO Léxico: Token '" + programa[i] + "' não é aceito. Erro na linha: " + str(num_linha))
                 break
             
 
@@ -256,6 +261,6 @@ class Analisador_Lexico:
         # FUNÇÃO MAIN
 
 if __name__ == "__main__": # Só executa se for chamado direto no prompt como principal
-     with open(sys.argv[1],"r") as programa:         # Recebe o arquivo do primeiro argumento e lê ele. Ex.: "CMD:> Analisador_Lexico.py meu_programa.txt"
-         for tk in Analisador_Lexico().Reconhecedor(programa.read()):
-             print (tk)
+    with open(sys.argv[1],"r") as programa:         # Recebe o arquivo do primeiro argumento e lê ele. Ex.: "CMD:> Analisador_Lexico.py meu_programa.txt"
+        for tk in Analisador_Lexico().Reconhecedor(programa.read()):
+            print (tk)
