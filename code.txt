@@ -1,0 +1,7 @@
+// Contador de alunos que tiraram 10
+void main(){
+i=0;
+if (nota == 10){
+	i=i++;
+}
+}
