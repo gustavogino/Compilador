@@ -59,12 +59,22 @@ class Analisador_Lexico:
             elif programa[i].isalpha():      # Se não for número, verifica se é uma letra...
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-
+				lex_cod = "26"
                 while i < tam-1:             # Enquanto continuar sendo letra, número ou underline, continua adicionando caracter ao token
                     if programa[i].isalpha() or programa[i].isdigit() or programa[i] is "_":
                         token += programa[i]
                         i+=1
                     else:
+						if programa[i] == "(":
+							token += programa[i]
+							i+=1
+							if programa[i] == ")":
+								token += programa[i]
+								i+=1
+								lex_cod = "27"
+						else:
+							lex_cod = "9"				
+						
                         break                # Se não for nenhum desses, para o while          
 
                 if token in self.palavras_reservadas:           # Verfica se o token é uma das palavras reservadas da linguagem
