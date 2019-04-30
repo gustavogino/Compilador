@@ -248,6 +248,8 @@ class Analisador_Lexico:
 
                 print("ERRO Léxico: Token '" + programa[i] + "' não é aceito. Erro na linha: " + str(num_linha))
                 i+=1
+                token="Erro"
+                lex_cod=-1
             
 
             resultado.append(Token(token, lex_cod, num_linha))  # Adiciona resultado na lista (vetor resultado)
