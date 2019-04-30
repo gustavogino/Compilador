@@ -9,7 +9,7 @@ class Token:
 
     def __str__(self):
         return str(self.palavra) + "\t\t" + str(self.lex_cod) + "\t\t" + str(self.linha)
-        # Saida:     Token            Código                  Nº Linha
+        # Saida:          Token               Código                  Nº Linha
 
 
 class Analisador_Lexico:
@@ -59,22 +59,17 @@ class Analisador_Lexico:
             elif programa[i].isalpha():      # Se não for número, verifica se é uma letra...
                 token += programa[i]         # Se for, adiciona ao token
                 i+=1                         # Avança para o proximo caracter
-				lex_cod = "26"
+                lex_cod = "26"
                 while i < tam-1:             # Enquanto continuar sendo letra, número ou underline, continua adicionando caracter ao token
                     if programa[i].isalpha() or programa[i].isdigit() or programa[i] is "_":
                         token += programa[i]
                         i+=1
                     else:
-						if programa[i] == "(":
-							token += programa[i]
-							i+=1
-							if programa[i] == ")":
-								token += programa[i]
-								i+=1
-								lex_cod = "27"
-						else:
-							lex_cod = "9"				
-						
+                        if programa[i] == "(":
+                            lex_cod = "27"
+                        else:
+                            lex_cod = "9"
+
                         break                # Se não for nenhum desses, para o while          
 
                 if token in self.palavras_reservadas:           # Verfica se o token é uma das palavras reservadas da linguagem
@@ -252,7 +247,7 @@ class Analisador_Lexico:
             else:       # Caso seja algum caracter que não esteja definido na linguagem
 
                 print("ERRO Léxico: Token '" + programa[i] + "' não é aceito. Erro na linha: " + str(num_linha))
-                break
+                i+=1
             
 
             resultado.append(Token(token, lex_cod, num_linha))  # Adiciona resultado na lista (vetor resultado)
