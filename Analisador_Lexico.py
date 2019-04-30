@@ -123,6 +123,26 @@ class Analisador_Lexico:
                         i+=1
                     continue
 
+                if programa[i] is "*":
+                    ln = num_linha
+                    while i < tam -1:
+                        i+=1
+
+                        if programa[i] is "*":   # Verificar se é fim de comentário
+                            i+=1
+                            if programa[i] is "/": # Confirma o '*/'
+                                i+=1
+                                break    
+                        elif programa[i] is "\n":
+                            num_linha += 1       # Se quebrar linha, conta como linha nova e continua buscando fim do comentario    
+                    else:
+                            print("ERRO Léxico: Comentário aberto e não fechado, inicio na linha: "+str(ln))  # Erro se não for fechado
+                            i+=1
+                            token="ERRO"
+                            lex_cod=-1
+                            
+                    continue        
+
 
             elif programa[i] == "<":
             
@@ -221,28 +241,7 @@ class Analisador_Lexico:
                 i+=1                         # Avança para o proximo caracter
                 lex_cod = "40"               # Código do Token ';'    
 
-            elif programa[i] is "/":         # Verificar se é início de comentário em bloco
-                i+=1
-                if programa[i] is "*":
-                    #ln = num_linha
-                    while i < tam -1:
-                        i+=1
-
-                        if programa[i] is "*":   # Verificar se é fim de comentário
-                            i+=1
-                            if programa[i] is "/": # Confirma o '*/'
-                                i+=1
-                                break
-
-                        #elif programa[i] is "\n":
-                            #num_linha += 1       # Se quebrar linha, conta como linha nova e continua buscando fim do comentario    
-                    else:
-                            print("ERRO Léxico: Comentário aberto e não fechado, inicio na linha: "+str(ln))  # Erro se não for fechado
-                            i+=1
-                            token="ERRO"
-                            lex_cod=-1
-                            
-                    continue
+            
 
 
 
