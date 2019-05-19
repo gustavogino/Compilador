@@ -153,14 +153,14 @@ class Analisador_Sintatico:
 
 	def Verificador_Sinstatico(self, entrada):
 		inicial= 51 # Bloco Incial
-		codigos_lex = [2,11,46,45,39,9,32,5,40,15,46,9,31,5,45,39,9,32,9,36,40,38,38] #Entrada do léxico
+		codigos_lex = entrada 
 		tamanho = len(codigos_lex)
 		i = 0
 		p = Pilha()
 		p.empilha(inicial)
 		while i <= tamanho-1:	
 			top = p.topo()
-			print(str(top) + "==" +str(codigos_lex[i]) )
+			print(str(top) + "==" +str(codigos_lex[i]) )  #DEBUG
 
 			if top == codigos_lex[i]:
 				print(p.desempilha())
@@ -168,26 +168,27 @@ class Analisador_Sintatico:
 				
 
 
-			elif self.tabela_parsing[top][codigos_lex[i]] > 0: #FAZER: ou se for nula
+			elif self.tabela_parsing[top][codigos_lex[i]] > 0 : #FAZER: ou se for nula
+				if(codigos_lex[i] <= 50 and top >=51):
+					p.desempilha()
+					num_regra = self.tabela_parsing[top][codigos_lex[i]]
+					vetor_regra = self.regras[num_regra] 
+					j = 0
 
-				p.desempilha()
-				num_regra = self.tabela_parsing[top][codigos_lex[i]]
-				vetor_regra = self.regras[num_regra] 
-				j = 0
-
-				while j < len(vetor_regra):
-					token = vetor_regra[j]
-					if token != 0 :
-						p.empilha(token)
-						
-					j = j+1
+					while j < len(vetor_regra):
+						token = vetor_regra[j]
+						if token != 0 :
+							p.empilha(token)
+							
+						j = j+1
 				
-
+				else:
+					print("Token inesperado")
 
 			else:
 				print("erro")
 				i=i+1
-			p.mostrar()
+			p.mostrar()#DEBUG
 
 
 		if p.vazia() and i == (tamanho):
@@ -198,6 +199,6 @@ class Analisador_Sintatico:
 #Main
 if __name__ == "__main__": # Só executa se for chamado direto no prompt como principal
 
-	codigos_lex = [2, 11, 46, 45, 39, 9, 32, 5, 40, 15, 46, 9, 31, 5, 45, 39, 9, 32, 9, 36, 40, 38, 38] #Entrada do léxico
+	codigos_lex = [2, 11, 39, 9, 32, 5, 40, 15, 46, 9, 31, 5, 45, 39, 9, 32, 9, 36, 40, 38, 38] #Entrada do léxico
 	Analisador_Sintatico().Verificador_Sinstatico(codigos_lex)
 
